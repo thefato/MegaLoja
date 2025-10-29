@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mega-loja-database
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  flyway:
+    image: flyway/flyway:10
+    container_name: flyway
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      FLYWAY_URL: jdbc:postgresql://postgres:5432/mega-loja-database
+      FLYWAY_USER: appuser
+      FLYWAY_PASSWORD: secret
+      # FLYWAY_SCHEMAS: public
+      # FLYWAY_BASELINE_ON_MIGRATE: "true"
+    volumes:
+      - ./src/main/resources/migration:/src/main/resources/migration:ro
+    command: -locations=filesystem:/src/main/resources/migration -connectRetries=60 migrate
+
+volumes:
+  pgdata:
