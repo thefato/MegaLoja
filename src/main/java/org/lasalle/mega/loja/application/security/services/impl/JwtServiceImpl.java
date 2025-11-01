@@ -1,8 +1,7 @@
-package org.lasalle.mega.loja.application.security.impl;
+package org.lasalle.mega.loja.application.security.services.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.lasalle.mega.loja.application.security.JwtService;
-import org.lasalle.mega.loja.domain.request.AuthRequest;
+import org.lasalle.mega.loja.application.security.services.JwtService;
 import org.lasalle.mega.loja.domain.vo.JwtProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,6 +1,5 @@
-package org.lasalle.mega.loja.application.security;
+package org.lasalle.mega.loja.application.security.services;
 
-import org.lasalle.mega.loja.domain.request.AuthRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 

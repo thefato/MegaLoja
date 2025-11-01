@@ -1,11 +1,5 @@
 package org.lasalle.mega.loja.domain.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public record AuthRequest(String email, String password) {
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class AuthRequest {
 }

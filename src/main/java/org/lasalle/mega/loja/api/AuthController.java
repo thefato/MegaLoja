@@ -13,9 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth/v1")
 public class AuthController {
 
-    @Operation(summary = "Gera o token JWT")
-    @PostMapping("/token")
-    public ResponseEntity<TokenDTO> getAuthToken(@RequestBody AuthRequest authRequest) {
+    @Operation(summary = "Efetua o login, gerando o token JWT")
+    @PostMapping("/login")
+    public ResponseEntity<TokenDTO> login(@RequestBody AuthRequest authRequest) {
+        return ResponseEntity.ofNullable(null);
+    }
+
+    @Operation(summary = "Registra um novo usuario no sistema")
+    @PostMapping("/register")
+    public ResponseEntity<TokenDTO> register(@RequestBody AuthRequest authRequest) {
         return ResponseEntity.ofNullable(null);
     }
 
