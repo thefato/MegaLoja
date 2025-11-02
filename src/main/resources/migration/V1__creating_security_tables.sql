@@ -1,4 +1,3 @@
--- Core tables
 CREATE TABLE db_users_credentials (
                           id_user BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                           vc_email VARCHAR(256) NOT NULL UNIQUE,
@@ -31,7 +30,6 @@ CREATE TABLE db_user_groups (
 CREATE INDEX idx_user_groups__id_user  ON db_user_groups (id_user);
 CREATE INDEX idx_user_groups__id_group ON db_user_groups (id_group);
 
--- Junction: groups ↔ scopes
 CREATE TABLE db_group_scopes (
                                  id_group_scope BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                                  id_group BIGINT NOT NULL,

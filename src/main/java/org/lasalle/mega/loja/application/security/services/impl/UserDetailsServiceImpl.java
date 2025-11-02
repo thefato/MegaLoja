@@ -9,6 +9,7 @@ import org.lasalle.mega.loja.domain.entity.PermissionGroupScopeEntity;
 import org.lasalle.mega.loja.domain.entity.PermissionScopeEntity;
 import org.lasalle.mega.loja.domain.entity.UserCredentialsEntity;
 import org.lasalle.mega.loja.domain.entity.UserPermissionGroupEntity;
+import org.lasalle.mega.loja.infrastructure.exceptions.UserCredentialsNotFoundException;
 import org.lasalle.mega.loja.infrastructure.exceptions.UserGroupNotFoundException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -32,12 +33,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserPermissionGroupRepository userPermissionGroupRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) {
         Optional<UserCredentialsEntity> optionalCredentials = credentialsRepository.findByEmail(email);
 
         if (optionalCredentials.isEmpty()) {
             log.warn("m=loadUserByUsername o usuario não foi encontrado email={}", email);
-            throw new UsernameNotFoundException(email);
+            throw new UserCredentialsNotFoundException(email);
         }
 
         UserCredentialsEntity credentials = optionalCredentials.get();
