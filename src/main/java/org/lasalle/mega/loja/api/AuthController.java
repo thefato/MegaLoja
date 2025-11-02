@@ -1,6 +1,7 @@
 package org.lasalle.mega.loja.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.lasalle.mega.loja.application.security.services.AuthLoginService;
 import org.lasalle.mega.loja.application.security.services.AuthRegisterService;
@@ -23,6 +24,7 @@ public class AuthController {
 
     private final AuthRegisterService authRegisterService;
 
+    @PermitAll
     @Operation(summary = "Efetua o login, gerando o token JWT")
     @PostMapping("/login")
     public ResponseEntity<UserScopesResponse> login(@RequestBody AuthRequest authRequest) {
@@ -37,6 +39,7 @@ public class AuthController {
                 .body(response);
     }
 
+    @PermitAll
     @Operation(summary = "Registra um novo usuario no sistema")
     @PostMapping("/register")
     public ResponseEntity<UserScopesResponse> register(@RequestBody AuthRequest authRequest) {
