@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaLoja</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+    </head>
+<body>
+
+    <div class="header-full-width">
+        <header class="cabecalho">
+            <div class="logo">
+                <h1>Mega<br><span>Loja</span></h1>
+            </div>
+
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input id="searchItem" type="text" placeholder="Encontre aqui as melhores ofertas"/>
+            </div>
+
+            <div class="menu">
+                <a href="login.html" class="menu-item">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Sua conta</span>
+                </a>
+                <a href="carrinho.html" class="menu-item carrinho-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                <button id="btnAcessibilidade" class="menu-item acessibilidade-icon">
+                    <i class="fa-solid fa-person"></i>
+                </button>
+            </div>
+        </header>
+    </div>
+
+    <div class="container">
+
+        <main>
+            
+            <section class="carrocel">
+                <div class="slides-container" id="slidesContainer">
+                    
+                    <div class="slide active">
+                        <img src="https://imgs.via.com.br/banners/CasasBahia/9630d906-e3e2-4e16-934c-8f1466b5b0f4.png?imwidth=2080" 
+                            alt="Promoção de Eletrodomésticos" 
+                            class="banner-img">
+                    </div>
+                    
+                    <div class="slide">
+                        <img src="https://imgs.via.com.br/banners/CasasBahia/dfcdd04a-93d7-4fd7-a4f8-0652728e10ba.png?imwidth=2080" 
+                            alt="Promoção de móveis" 
+                            class="banner-img">
+                    </div>
+
+                    <div class="slide">
+                        <img src="https://www.americanas.com.br/_next/image?url=https%3A%2F%2Famericanas.vtexassets.com%2Fassets%2Fvtex.file-manager-graphql%2Fimages%2Fb7f35367-dbbc-4db5-be5c-ce6a87c46af0___f4139aa3d13aef563cfbb36f74b5b6e1.png&w=1280&q=75" 
+                            alt="Ofertas em destaque" 
+                            class="banner-img">
+                    </div>
+
+                </div>
+
+                <button id="prevBtn" class="nav-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="nextBtn" class="nav-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+            </section>
+
+            <section class="categorias">
+                <h2>Categorias</h2>
+                <div class="category-list">
+                    <div class="category-item">
+                        <a href="construcao.html">
+                            <img src="https://www.cimentofortedeverdade.com.br/assets/produto1-5UxPV0zn.png" alt="Materiais de Construção">
+                            <p>Materiais de Construção</p>
+                        </a>
+                    </div>
+                    <div class="category-item">
+                        <a href="eletronicos.html">
+                            <img src="imagens/notebook.png" alt="Produtos Eletrônicos">
+                            <p>Produtos Eletrônicos</p>
+                        </a>
+                    </div>
+                    <div class="category-item">
+                        <a href="eletrodomesticos.html">
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/037/515/793/small/ai-generated-kitchen-oven-on-transparent-background-ai-generated-png.png" alt="Eletrodomésticos">
+                            <p>Eletrodomésticos</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recomendados">
+                <h2>Itens indicados com base no seu interesse</h2>
+                <div class="product-grid" id="product-container"></div>
+            </section>
+        </main>
+    </div>
+    
+    <div id="acessibilidade-menu" class="sidebar">
+        <button id="close-sidebar" class="close-btn"><i class="fa-solid fa-times"></i></button>
+        <h3>Acessibilidade</h3>
+        <ul>
+            <li><button id="increase-font">Aumentar Fonte</button></li>
+            <li><button id="decrease-font">Diminuir Fonte</button></li>
+            <li><button id="contrast">Alto Contraste</button></li>
+        </ul>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

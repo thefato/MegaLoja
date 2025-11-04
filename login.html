@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login MegaLoja</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+    </head>
+<body>
+
+    <div class="header-full-width">
+        <header class="cabecalho">
+            <div class="logo">
+                <h1>Mega<br><span>Loja</span></h1>
+            </div>
+
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input id="searchItem" type="text" placeholder="Encontre aqui as melhores ofertas"/>
+            </div>
+
+            <div class="menu">
+                <a href="index.html" class="menu-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Voltar</span>
+                </a>
+                <a href="carrinho.html" class="menu-item carrinho-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                <button id="btnAcessibilidade" class="menu-item acessibilidade-icon">
+                    <i class="fa-solid fa-person"></i>
+                </button>
+            </div>
+        </header>
+    </div>
+    
+    <div class="login-wrapper">
+        <div class="card-container">
+            <div class="switch-header">
+                <span class="label-login">Entrar</span>
+                <label class="switch">
+                    <input class="toggle" type="checkbox" id="toggleSwitch">
+                    <span class="slider"></span>
+                </label>
+                <span class="label-register">Cadastre-se</span>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card__inner">
+                    <div class="flip-card__front">
+                        <div class="title">Entrar</div>
+                        <form action="login.php" method="post" class="flip-card__form">
+                            <input type="email" placeholder="Email" name="email_login" class="flip-card__input">
+                            <input type="password" placeholder="Password" name="senha_login" class="flip-card__input">
+                            <button class="flip-card__btn">Entrar!</button>
+                        </form>
+                    </div>
+                    
+                    <div class="flip-card__back">
+                        <div class="title">Cadastre-se</div>
+                        <form action="cadastro.php" method="post" class="flip-card__form">
+                            <input id="user" type="text" name="user" placeholder="Name" class="flip-card__input">
+                            <input id="cpf" type="number" name="cpf" placeholder="Cpf" class="flip-card__input">
+                            <input id="email" type="email" name="email" placeholder="Email" class="flip-card__input">
+                            <input id="senha" type="password" name="senha" placeholder="Password" class="flip-card__input">
+                            <button type="submit" value="create" class="flip-card__btn">Confirme!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
