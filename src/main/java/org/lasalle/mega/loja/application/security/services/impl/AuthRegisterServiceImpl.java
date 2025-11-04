@@ -10,7 +10,7 @@ import org.lasalle.mega.loja.application.security.services.AuthRegisterService;
 import org.lasalle.mega.loja.domain.entity.PermissionGroupEntity;
 import org.lasalle.mega.loja.domain.entity.UserCredentialsEntity;
 import org.lasalle.mega.loja.domain.entity.UserPermissionGroupEntity;
-import org.lasalle.mega.loja.domain.request.AuthRequest;
+import org.lasalle.mega.loja.domain.request.RegisterAuthRequest;
 import org.lasalle.mega.loja.domain.response.UserAuthResponse;
 import org.lasalle.mega.loja.infrastructure.exceptions.UserAlreadyExistsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +34,7 @@ public class AuthRegisterServiceImpl implements AuthRegisterService {
 
     @Override
     @Transactional
-    public UserAuthResponse executeUserRegister(AuthRequest authRequest) {
+    public UserAuthResponse executeUserRegister(RegisterAuthRequest authRequest) {
         if (credentialsRepository.findByEmail(authRequest.email()).isPresent()) {
             log.warn("m=executeUserRegister, o usuario {} já está registrado", authRequest.email());
             throw new UserAlreadyExistsException(authRequest.email());
@@ -54,6 +54,6 @@ public class AuthRegisterServiceImpl implements AuthRegisterService {
 
         permissionGroupRepository.save(permissionGroup);
 
-        return authLoginService.executeUserLogin(authRequest);
+        return authLoginService.executeUserLogin(authRequest.toLoginRequest());
     }
 }

@@ -6,7 +6,7 @@ import org.lasalle.mega.loja.application.repository.UserCredentialsRepository;
 import org.lasalle.mega.loja.application.security.services.AuthLoginService;
 import org.lasalle.mega.loja.application.security.services.JwtService;
 import org.lasalle.mega.loja.domain.entity.UserCredentialsEntity;
-import org.lasalle.mega.loja.domain.request.AuthRequest;
+import org.lasalle.mega.loja.domain.request.LoginAuthRequest;
 import org.lasalle.mega.loja.domain.response.UserAuthResponse;
 import org.lasalle.mega.loja.infrastructure.exceptions.UserCredentialsInvalidException;
 import org.lasalle.mega.loja.infrastructure.exceptions.UserCredentialsNotFoundException;
@@ -33,7 +33,7 @@ public class AuthLoginServiceImpl implements AuthLoginService {
     private final JwtService jwtService;
 
     @Override
-    public UserAuthResponse executeUserLogin(AuthRequest authRequest) {
+    public UserAuthResponse executeUserLogin(LoginAuthRequest authRequest) {
         UserCredentialsEntity credentials = credentialsRepository.findByEmail(authRequest.email())
                 .orElseThrow(() -> new UserCredentialsNotFoundException(authRequest.email()));
 

@@ -104,7 +104,6 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/actuator/health"
                         ).permitAll()
-                        .requestMatchers("/actuator/health").permitAll()
                         .anyRequest()
                         .authenticated()
                 )
