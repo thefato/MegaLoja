@@ -6,6 +6,9 @@
     <title>login MegaLoja</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+
     </head>
 <body>
 
@@ -50,21 +53,21 @@
                 <div class="flip-card__inner">
                     <div class="flip-card__front">
                         <div class="title">Entrar</div>
-                        <form action="login.php" method="post" class="flip-card__form">
-                            <input type="email" placeholder="Email" name="email_login" class="flip-card__input">
-                            <input type="password" placeholder="Password" name="senha_login" class="flip-card__input">
+                        <form id="loginForm" class="flip-card__form">
+                            <input id="email_login" type="email" placeholder="Email" name="email_login" class="flip-card__input">
+                            <input id="senha_login" type="password" placeholder="Password" name="senha_login" class="flip-card__input">
                             <button class="flip-card__btn">Entrar!</button>
                         </form>
                     </div>
                     
                     <div class="flip-card__back">
                         <div class="title">Cadastre-se</div>
-                        <form action="cadastro.php" method="post" class="flip-card__form">
+                        <form id="cadastroForm" class="flip-card__form">
                             <input id="user" type="text" name="user" placeholder="Name" class="flip-card__input">
                             <input id="cpf" type="number" name="cpf" placeholder="Cpf" class="flip-card__input">
                             <input id="email" type="email" name="email" placeholder="Email" class="flip-card__input">
                             <input id="senha" type="password" name="senha" placeholder="Password" class="flip-card__input">
-                            <button type="submit" value="create" class="flip-card__btn">Confirme!</button>
+                            <button type="submit" class="flip-card__btn">Confirme!</button>
                         </form>
                     </div>
                 </div>
@@ -73,5 +76,10 @@
     </div>
     
     <script src="script.js"></script>
+    <script src="API.js"></script>
+
+
 </body>
+
+
 </html>
