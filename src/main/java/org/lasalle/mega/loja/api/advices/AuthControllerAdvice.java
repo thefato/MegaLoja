@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class AuthControllerAdvice {
+public class AuthControllerAdvice extends BaseControllerAdvice {
 
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<ErrorInfo> handleAlreadyExists(UserAlreadyExistsException ex) {
@@ -25,12 +25,6 @@ public class AuthControllerAdvice {
     @ExceptionHandler(UserCredentialsInvalidException.class)
     public ResponseEntity<ErrorInfo> handleInvalidCredentials(UserCredentialsInvalidException ex) {
         return getResponse(ex, HttpStatus.UNAUTHORIZED);
-    }
-
-    private static ResponseEntity<ErrorInfo> getResponse(Exception ex, HttpStatus httpStatus) {
-        return ResponseEntity
-                .status(httpStatus)
-                .body(new ErrorInfo(httpStatus.value(), ex.getMessage()));
     }
 
 }

@@ -15,7 +15,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,16 +51,22 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserPermissionGroupEntity groupEntity = userCredentials.get();
         Set<PermissionGroupScopeEntity> scopes = groupEntity.getGroup().getGroupScopes();
 
-        List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList(scopes.stream()
-                .map(PermissionGroupScopeEntity::getScope)
-                .map(PermissionScopeEntity::getName)
-                .collect(Collectors.toSet()));
+        try {
+            List<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList(scopes.stream()
+                    .map(PermissionGroupScopeEntity::getScope)
+                    .map(PermissionScopeEntity::getName)
+                    .collect(Collectors.toSet()));
 
-        return AuthUserDetailsDTO.builder()
-                .authorities(authorityList)
-                .username(credentials.getEmail())
-                .password(credentials.getPasswordHash())
-                .build();
+            return AuthUserDetailsDTO.builder()
+                    .authorities(authorityList)
+                    .username(credentials.getEmail())
+                    .password(credentials.getPasswordHash())
+                    .build();
+        } catch (Exception e) {
+            log.error("Erro", e);
+            throw e;
+        }
+
     }
 
 }

@@ -25,13 +25,8 @@ public class PermissionGroupScopeEntity {
     @Column(name = "id_group_scope", nullable = false, updatable = false)
     private Long id;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "id_group",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "fk_group_scopes__group")
-    )
-    private PermissionGroupEntity group;
+    @Column(name = "id_group")
+    private Long group;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(

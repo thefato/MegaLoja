@@ -32,8 +32,9 @@ public class JwtServiceImpl implements JwtService {
         List<String> scopes = authentication.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
-                .filter(a -> a.startsWith("SCOPE_"))
-                .map(a -> a.substring("SCOPE_".length()))
+                .map(a -> a.contains("SCOPE_") ?
+                        a.substring("SCOPE_".length()) :
+                        a)
                 .sorted()
                 .toList();
 
