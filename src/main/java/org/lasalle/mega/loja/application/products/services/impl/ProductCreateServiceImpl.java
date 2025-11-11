@@ -9,7 +9,7 @@ import org.lasalle.mega.loja.domain.dto.ProductDTO;
 import org.lasalle.mega.loja.domain.entity.ProductCategoryEntity;
 import org.lasalle.mega.loja.domain.entity.ProductEntity;
 import org.lasalle.mega.loja.domain.request.ProductCreateRequest;
-import org.lasalle.mega.loja.infrastructure.exceptions.ProductCategoryNotExistsException;
+import org.lasalle.mega.loja.infrastructure.exceptions.ProductCategoryNotFoundException;
 import org.lasalle.mega.loja.infrastructure.exceptions.ProductInvalidAmountException;
 import org.lasalle.mega.loja.infrastructure.exceptions.ProductInvalidPriceException;
 import org.springframework.stereotype.Service;
@@ -34,17 +34,17 @@ public class ProductCreateServiceImpl implements ProductCreateService {
 
         if (productCategory.isEmpty()) {
             log.warn("m=createProduct, a categoria recebida não existe request {}", createRequest);
-            throw new ProductCategoryNotExistsException("Categoria não existente");
+            throw new ProductCategoryNotFoundException();
         }
 
         if (createRequest.amount() < 0) {
             log.warn("m=createProduct, a quantidade do produto recebida é menor que zero {}", createRequest);
-            throw new ProductInvalidAmountException("Quantidade menor que zero");
+            throw new ProductInvalidAmountException();
         }
 
         if (Objects.isNull(createRequest.cost()) || createRequest.cost().doubleValue() < 0) {
             log.warn("m=createProduct, o valor do produto recebida é menor que zero {}", createRequest);
-            throw new ProductInvalidPriceException("Valor menor que zero");
+            throw new ProductInvalidPriceException();
         }
 
         ProductEntity productEntity = ProductEntity.builder()
