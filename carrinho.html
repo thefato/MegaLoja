@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Carrinho MegaLoja</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+
+    </head>
+<body>
+
+    <div class="header-full-width">
+        <header class="cabecalho">
+            <div class="logo">
+                <h1>Mega<br><span>Loja</span></h1>
+            </div>
+
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input id="searchItem" type="text" placeholder="Encontre aqui as melhores ofertas"/>
+            </div>
+
+            <div class="menu">
+                <a href="index.html" class="menu-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Voltar</span>
+                </a>
+                <a href="login.html" class="menu-item">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Sua conta</span>
+                </a>
+                <button id="btnAcessibilidade" class="menu-item acessibilidade-icon">
+                    <i class="fa-solid fa-person"></i>
+                </button>
+            </div>
+        </header>
+    </div>
+    
+    <main class="cart-container">
+
+        <section class="cart-items-column">
+
+            <!--Botao de lixeira-->
+            <div class="cart-section-header">
+                <a href="#" class="remove-all-btn"><i class="fa-regular fa-trash-can"></i> REMOVER TODOS OS PRODUTOS</a>
+            </div>
+
+            <!--Para os produtos-->
+            <div class="product-cart-grid" id="product-cart-grid">
+                </div> 
+        </section> 
+        
+        <aside class="cart-summary-column">
+            <div class="summary-box">
+                <h3 class="summary-header"><i class="fa-regular fa-file-lines"></i> RESUMO</h3>
+                
+                <div class="summary-line">
+                    <span>Valor total dos Produtos:</span>
+                    <strong id="summary-products-value">R$ 0,00</strong>
+                </div>
+
+                <button class="btn btn-continuar">CONTINUAR</button>
+                <button class="btn btn-voltar">VOLTAR</button>
+            </div>
+        </aside> </main> 
+        <script src="script.js"></script>
+    <script src="API.js"></script>
+</body>
+</body>
+</html>

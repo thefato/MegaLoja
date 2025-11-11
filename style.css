@@ -1,3 +1,4 @@
+                                                                    /* --- Parte Gerais (fim antes do banner) --- */
 * {
     margin: 0;
     padding: 0;
@@ -101,6 +102,10 @@ a {
     padding: 5px 0;
 }
 
+.menu-item:hover{
+    color: #E66000;
+}
+
 .carrinho-icon,
 .acessibilidade-icon {
     gap: 0;
@@ -175,6 +180,8 @@ a {
     right: 15px;
 }
 
+/* --- Categorias --- */
+
 .categorias {
     margin-top: 30px;
 }
@@ -223,51 +230,9 @@ a {
     margin-top: 40px;
 }
 
-.product-grid {
-    display: grid;
-    /* Cria 4 colunas responsivas */
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
+/* --- Aqui seria os produtos, verificar mais tarde --- */
 
-.product-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    transition: box-shadow 0.2s;
-}
-
-.product-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.product-card img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-}
-
-.product-name {
-    font-size: 0.9rem;
-    color: #444;
-    margin-bottom: 10px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limite o conteúdo deste elemento a um max de 2 linhas. */
-    -webkit-box-orient: vertical; /* definindo a dire da caixa como vert  */
-    line-clamp: 2; 
-    overflow: hidden;
-    height: 2.8em;
-    line-height: 1.4em;
-}
-
-.product-price {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #e67e22;
-}
-
-/* --- Menu Lateral de Acessibilidade --- */
+                                    /* --- Parte de Acessibilidade: Menu Latera, teste simples --- */
 .sidebar {
     position: fixed;
     top: 0;
@@ -346,6 +311,8 @@ body.high-contrast #searchItem {
     border-color: #fff;
 }
 
+                                                                    /* --- Parte de Animação de entrada --- */
+
 @keyframes fadeInUp {
   
   from {
@@ -358,7 +325,7 @@ body.high-contrast #searchItem {
     transform: translateY(0);
   }
 }
-.container, .header-full-width {
+.body, .container, .login-wrapper, .cart-container, .header-full-width {
   animation: fadeInUp 0.6s ease-out;
 }
 
@@ -373,8 +340,8 @@ body.high-contrast #searchItem {
 }
 
 .card-container {
-    width: 340px; /* Largura fixa para o card */
-    perspective: 1000px; /* Define a perspectiva 3D para o efeito flip */
+    width: 340px;
+    perspective: 1000px;
 }
 
 /* --- Estilo do Toogle/Switch --- */
@@ -403,7 +370,7 @@ body.high-contrast #searchItem {
     display: inline-block;
     width: 60px;
     height: 34px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra conforme protótipo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border-radius: 34px;
 }
 
@@ -415,15 +382,15 @@ body.high-contrast #searchItem {
 
 .slider {
     position: absolute;
-    background-color: #888;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #f7f7f7;
+    background-color: #e67e22;
     transition: 0.4s;
     border-radius: 34px;
+    
 }
 
 .slider:before {
@@ -493,7 +460,7 @@ input:checked + .slider:before {
     color: #fff;
     font-weight: bold;
     margin-bottom: 30px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra do título */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .flip-card__form {
@@ -509,7 +476,7 @@ input:checked + .slider:before {
     border: none;
     border-radius: 4px;
     font-size: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra do input */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     background-color: #fff;
     color: #333;
 }
@@ -523,11 +490,143 @@ input:checked + .slider:before {
     font-weight: bold;
     cursor: pointer;
     background-color: #fff;
-    color: #e67e22;
+    color: #c15e07;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
     transition: background-color 0.2s;
 }
 
 .flip-card__btn:hover {
-    background-color: #e0e0e0;
+    background-color: #ef9d21;
+    color: #000;
+}
+
+                                                                    /* --- Parte do Carrinho --- */
+
+.cart-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    padding: 24px;
+    max-width: 1300px;
+    margin: 20px auto;
+}
+
+.cart-items-column {
+    flex: 2;
+    min-width: 300px;
+}
+
+.cart-summary-column {
+    flex: 1;
+    min-width: 280px;
+    max-width: 380px;
+    position: sticky; 
+    top: 20px;
+
+}
+
+/* --- Componentes da Coluna Esquerda --- */
+
+.cart-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+.cart-section-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.remove-all-btn {
+    color: #E53E3E;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* --- Aqui seria o Card de Produto, verificar com a integração mais tarde --- */
+
+
+
+/* --- Componentes da Coluna Direita (Resumo) --- */
+.summary-box {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.237);
+    padding: 24px;
+    
+}
+
+.summary-header {
+    margin: 0 0 16px;
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 12px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+}
+
+.summary-line strong {
+    font-size: 16px;
+    color: var(--color-text-primary);
+}
+
+/* --- Botões --- */
+.btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.149);
+}
+
+.btn-continuar {
+    background-color: var(--color-orange);
+    color: var(--color-white);
+    margin-bottom: 8px;
+}
+
+.btn-continuar:hover {
+    background-color: #E66000;
+}
+
+.btn-voltar {
+    background-color: var(--color-white);
+    color: var(--color-orange);
+    border: 1px solid var(--color-orange);
+}
+
+.btn-voltar:hover {
+    background-color: #ef9d21;
 }
