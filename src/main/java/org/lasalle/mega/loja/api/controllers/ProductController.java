@@ -7,13 +7,16 @@ import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.lasalle.mega.loja.application.products.services.ProductCreateService;
 import org.lasalle.mega.loja.application.products.services.ProductRetrieveService;
+import org.lasalle.mega.loja.application.products.services.ProductUpdateService;
 import org.lasalle.mega.loja.domain.dto.ProductDTO;
 import org.lasalle.mega.loja.domain.request.ProductCreateRequest;
+import org.lasalle.mega.loja.domain.request.ProductUpdateRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +30,8 @@ public class ProductController {
 
     private final ProductRetrieveService productRetrieveService;
 
+    private final ProductUpdateService productUpdateService;
+
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('SCOPE_CREATE_PRODUCT')")
     @ApiResponses({
@@ -37,8 +42,25 @@ public class ProductController {
     })
     @Operation(summary = "Realiza o cadastro de um novo produto no sistema")
     public ResponseEntity<ProductDTO> save(@RequestBody ProductCreateRequest createRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
                 .body(productCreateService.createProduct(createRequest));
+    }
+
+    @PatchMapping("/update")
+    @PreAuthorize("hasAuthority('SCOPE_CREATE_PRODUCT')")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "OK"),
+            @ApiResponse(responseCode = "401", description = "O nome informado não pode ser vazio"),
+            @ApiResponse(responseCode = "401", description = "O preço precisa ser maior ou igual a zero"),
+            @ApiResponse(responseCode = "401", description = "A quantidade precisa ser maior ou igual a zero"),
+            @ApiResponse(responseCode = "401", description = "A categoria informada precisa existir"),
+    })
+    @Operation(summary = "Realiza a atualização de um produto no sistema")
+    public ResponseEntity<ProductDTO> save(@RequestBody @Validated ProductUpdateRequest updateRequest) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(productUpdateService.updateProduct(updateRequest));
     }
 
     @PermitAll
