@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebook Generico</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+<body>
+
+    <div class="header-full-width">
+        <header class="cabecalho">
+            <div class="logo">
+                <h1>Mega<br><span>Loja</span></h1>
+            </div>
+
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input id="searchItem" type="text" placeholder="Encontre aqui as melhores ofertas"/>
+            </div>
+
+            <div class="menu">
+
+                <a href="index.html" class="menu-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Voltar</span>
+                </a>
+
+                <a href="login.html" class="menu-item">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Sua conta</span>
+                </a>
+                <a href="carrinho.html" class="menu-item carrinho-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                <button id="btnAcessibilidade" class="menu-item acessibilidade-icon">
+                    <i class="fa-solid fa-person"></i>
+                </button>
+            </div>
+        </header>
+    </div>
+
+<main class="product-container">
+
+    <section class="product-item-column">
+        <div class="product-cart-grid" id="product-cart-grid">
+
+            <h2 id="NOME DO PRODUTO AQUI">Notebook Generico</h2>
+            
+            <img id="IMAGEM DO PRODUTO" src="imagens/notebook.png" alt="Imagem do Produto">
+            
+            <span id="DESCRIÇÃO DO PRODUTO AQUI">
+                consectetur adipiscing elit. 
+                Morbi non tortor a est vehicula consequat. 
+                Pellentesque auctor ut sem vitae dignissim. 
+                In varius ex sed risus mollis, et cursus augue commodo. 
+                Donec vulputate tincidunt ex at dignissim. Curabitur ut est id lorem gravida sodales.
+            </span>
+        </div> 
+    </section> 
+    
+    <aside class="product-paymentDescription-column">
+        <div class="paymentDescription-box">
+            
+            <h3 class="payment-header"><strong id="VALOR DO PRODUTO AQUI">R$ 779,90</strong></h3>
+            
+            <div class="payment-extra-summary-line">
+                <span id="BONUS DO PRODUTO AQUI?">
+                    À vista no PIX com 10% de desconto<br>
+                    R$ 866,56 em até 10x de R$ 86,65 sem juros<br>
+                    ou 1x com 10% de desconto  no cartão
+                </span>
+            </div>
+
+            <div class="quantity-selector">
+                <label for="quantity-input">Quantidade:</label>
+                <div class="quantity-controls">
+                    <button class="quantity-btn" id="quantity-decrease" aria-label="Diminuir quantidade">-</button>
+                    <input type="number" id="quantity-input" value="1" min="1" readonly>
+                    <button class="quantity-btn" id="quantity-increase" aria-label="Aumentar quantidade">+</button>
+                </div>
+            </div>
+            
+            <div class="Selected-store">
+                <h3 class="store-name" id="NOME DA LOJA AQUI" >Loja PORTO ALEGRE - Praia de Belas - RS</h3>
+                <span id="ENDEREÇO DA LOJA AQUI">Av. Praia de Belas, 1181 - Andar 03</span>
+            
+                Estoque na Loja: <span id="INFORMAÇÃO DO ESTOQUE DA LOJA AQUI">Disponível</span>
+                <button id="BOTAO PARA VISUALIZAR QTD NO ESTOQUE" class="view-stock">Verificar Quantidade</button>
+                <button id="BOTAO PARA ALTERAR A LOJA" class="alter-store">Alterar Loja</button>
+            </div>
+
+            <button id="BOTAO PARA COMPRAR AGORA" class="btn-buy">Comprar Agora</button>
+            <button id="BOTAO AD AO CARRINHO" class="btn-addCart"> <i class="fa-solid fa-cart-plus"></i> Adicionar ao Carrinho</button>
+        </div>
+    </aside> 
+</main> 
+    
+    <script src="script.js"></script>
+    <script src="API.js"></script>
+</body>
+</body>
+</html>
