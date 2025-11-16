@@ -212,9 +212,18 @@ body.high-contrast #searchItem {
     transform: translateY(0);
   }
 }
-.body, .container, .login-wrapper, .product-container, .cart-container, .header-full-width {
+.body, .container, .login-wrapper, .product-container, .cart-container, .admin-container, .header-full-width {
   animation: fadeInUp 0.6s ease-out;
 }
+
+/* --- Responsividade --- */
+@media (max-width: 900px) {
+    .admin-container {
+        /* As colunas passam a ser uma só (empilhadas) */
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ____________________________________________________________________________________________________________________________________________________________________*/
                                                                     /* --- FIM DA Parte Geral --- */
                                                                     /* --- Parte Do Index --- */
@@ -875,4 +884,204 @@ input:checked + .slider:before {
 
 .btn-addCart i {
   margin-right: 8px;
+}
+
+/* ____________________________________________________________________________________________________________________________________________________________________*/
+                                                                    /* --- Parte do painel do ADMIN --- */
+
+/* --- Layout Principal do Admin --- */
+.admin-container {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.admin-container h1 {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 28px;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+}
+
+.management-section {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    align-self: start;
+}
+
+.management-section h2 {
+    margin-top: 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-orange);
+    color: var(--color-text-primary);
+}
+
+/* --- Formulário Admin --- */
+.admin-form fieldset {
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 16px;
+}
+
+/* O container da lista, que se parece com um input */
+.item-list-selectable {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px; /* Altura máxima */
+    overflow-y: auto; /* Scroll se passar da altura */
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    background-color: var(--color-white);
+}
+
+/* Cada item (loja) dentro da lista */
+.item-list-selectable li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--color-border);
+    font-weight: bold;
+    color: #444;
+}
+
+.item-list-selectable li:last-child {
+    border-bottom: none;
+}
+
+/* O estilo do item QUANDO ESTÁ SELECIONADO (o azul!) */
+.item-list-selectable li.selected {
+    background-color: var(--color-blue-dark); /* #007BFF */
+    color: var(--color-white);
+}
+
+/* Um efeitinho visual ao passar o mouse */
+.item-list-selectable li:not(.selected):hover {
+    background-color: #f4f4f4;
+}
+
+.admin-form legend {
+    font-weight: bold;
+    padding: 0 8px;
+    font-size: 1.1em;
+    color: var(--color-text-primary);
+}
+
+.admin-form div {
+    margin-bottom: 16px;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Inputs, Textarea e Selects padronizados */
+.admin-form input[type="text"],
+.admin-form input[type="number"],
+.admin-form textarea,
+.admin-form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.admin-form textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: Arial, sans-serif;
+}
+
+/* --- Lista de Itens --- */
+.item-list-container {
+    margin-top: 24px;
+}
+
+.item-list-container h3 {
+    font-size: 1.2em;
+    color: var(--color-text-primary);
+    border-top: 1px solid var(--color-border);
+    padding-top: 16px;
+}
+
+.item-list {
+    list-style: none;
+    padding-left: 0;
+    max-height: 400px; /* Limita a altura e adiciona scroll */
+    overflow-y: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+}
+
+.item-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.item-list li:last-child {
+    border-bottom: none;
+}
+
+.item-list li span {
+    font-weight: bold;
+    color: #333;
+}
+
+.item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* --- Botões --- */
+.btn-primary {
+    background-color: var(--color-orange);
+    color: var(--color-white);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #E66000;
+}
+
+.btn-edit,
+.btn-remove {
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.btn-edit {
+    background-color: var(--color-blue-light);
+    border: 1px solid var(--color-blue-dark);
+    color: var(--color-blue-dark);
+}
+
+.btn-remove {
+    background-color: var(--color-red-light);
+    border: 1px solid var(--color-red-dark);
+    color: var(--color-red-dark);
 }

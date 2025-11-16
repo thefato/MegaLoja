@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Admin - MegaLoja</title>
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="admin.css"> <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        :root {
+            --color-orange: #FF6B00;
+            --color-text-primary: #333;
+            --color-border: #EAEAEA;
+            --color-background: #F8F9FA;
+            --color-white: #FFFFFF;
+            --color-blue-dark: #007BFF;
+            --color-blue-light: #EBF5FF;
+            --color-red-dark: #E53E3E;
+            --color-red-light: #FFF5F5;
+        }
+
+        body {
+            background-color: var(--color-background);
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="header-full-width">
+        <header class="cabecalho">
+            <div class="logo">
+                <h1>Mega<br><span>Loja</span></h1>
+            </div>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input id="searchItem" type="text" placeholder="Buscar..."/>
+            </div>
+            <div class="menu">
+                <a href="index.html" class="menu-item">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+                <a href="carrinho.html" class="menu-item carrinho-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                <button id="btnAcessibilidade" class="menu-item acessibilidade-icon">
+                    <i class="fa-solid fa-person"></i>
+                </button>
+            </div>
+        </header>
+    </div>
+
+    <main class="admin-container">
+        <h1>Painel Administrativo</h1>
+
+        <section class="management-section" id="store-management">
+            <h2>Gerenciamento de Lojas</h2>
+
+            <form class="admin-form" id="store-form">
+                <fieldset>
+                    <legend>Adicionar / Editar Loja</legend>
+                    
+                    <input type="hidden" id="ID_LOJA" name="store_id">
+                    
+                    <div>
+                        <label for="NOME_LOJA">Nome da Loja:</label>
+                        <input type="text" id="NOME_LOJA" name="store_name" placeholder="Ex: MegaLoja - Unidade Centro" required>
+                    </div>
+                    
+                    <div>
+                        <label for="ENDERECO_LOJA">Endereço (opcional):</label>
+                        <input type="text" id="ENDERECO_LOJA" name="store_address" placeholder="Ex: Rua Fictícia, 123">
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="store-submit-button">Salvar Loja</button>
+                </fieldset>
+            </form>
+
+            <div class="item-list-container">
+                <h3>Lojas Cadastradas</h3>
+                <ul id="store-list" class="item-list">
+                </ul>
+            </div>
+        </section>
+
+        <section class="management-section" id="product-management">
+            <h2>Gerenciamento de Produtos</h2>
+
+            <form class="admin-form" id="product-form">
+                <fieldset>
+                    <legend>Adicionar / Editar Produto</legend>
+                    
+                    <input type="hidden" id="ID_PRODUTO" name="product_id">
+                    
+                    <div>
+                        <label for="NOME_PRODUTO">Nome do Produto:</label>
+                        <input type="text" id="NOME_PRODUTO" name="product_name" placeholder="Ex: Notebook Gamer Modelo X" required>
+                    </div>
+
+                    <div>
+                        <label for="CATEGORIA_PRODUTO">Categoria:</label>
+                        <select id="CATEGORIA_PRODUTO" required>
+                            <option value="" disabled selected>Selecione uma categoria</option>
+                            <option value="Eletrodomestico">Eletrodoméstico</option>
+                            <option value="Eletronicos">Eletrônicos</option>
+                            <option value="Construcao">Construção</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="DESCRICAO_PRODUTO">Descrição:</label>
+                        <textarea id="DESCRICAO_PRODUTO" name="product_description" rows="3" placeholder="Insira a descrição..."></textarea>
+                    </div>
+
+                    <div>
+                        <label for="PRECO_PRODUTO">Preço (R$):</label>
+                        <input type="number" id="PRECO_PRODUTO" name="product_price" placeholder="1999.90" step="0.01" min="0" required>
+                    </div>
+
+                    <div>
+                        <label for="URL_IMAGEM_PRODUTO">URL da Imagem:</label>
+                        <input type="text" id="URL_IMAGEM_PRODUTO" name="product_image_url" placeholder="http://...">
+                    </div>
+
+                    <div>
+                        <label for="product-store-list">Lojas que possuem (clique para selecionar):</label>
+                        
+                        <ul id="product-store-list" class="item-list-selectable">
+                            </ul>
+                        
+                        <input type="hidden" id="LOJAS_SELECIONADAS_INPUT" name="product_store_ids">
+                    </div>
+
+                    <div>
+                        <label for="QTD_ESTOQUE">Quantidade em Estoque:</label>
+                        <input type="number" id="QTD_ESTOQUE" name="product_stock" placeholder="10" min="0" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="product-submit-button">Salvar Produto</button>
+                </fieldset>
+            </form>
+
+            <div class="item-list-container">
+                <h3>Produtos Cadastrados</h3>
+                <ul id="product-list" class="item-list">
+                    </ul>
+            </div>
+            
+        </section>
+
+    </main>
+
+    <script src="admin.js"></script>
+    <script src="API.js"></script>
+
+    </body>
+</html>
