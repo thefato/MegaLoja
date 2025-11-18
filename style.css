@@ -891,29 +891,59 @@ input:checked + .slider:before {
 
 /* --- Layout Principal do Admin --- */
 .admin-container {
-    max-width: 1400px;
+    max-width: 900px;
     margin: 20px auto;
     padding: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 24px;
 }
 
 .admin-container h1 {
-    grid-column: 1 / -1;
     text-align: center;
     font-size: 28px;
     color: var(--color-text-primary);
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
+/* --- Menu de Navegação entre Lojas e Produtos --- */
+.admin-nav {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.btn-nav {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 1px solid var(--color-orange);
+    color: var(--color-orange);
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-nav.active{
+    color:#c3c3c3
+}
+
+.btn-nav:hover {
+    color: #E66000;
+}
+
+/* --- Seção de Gerenciamento --- */
 .management-section {
     background-color: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: 8px;
     padding: 24px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    align-self: start;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.304);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .management-section h2 {
@@ -930,49 +960,6 @@ input:checked + .slider:before {
     padding: 16px;
 }
 
-/* O container da lista, que se parece com um input */
-.item-list-selectable {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 150px; /* Altura máxima */
-    overflow-y: auto; /* Scroll se passar da altura */
-    border: 1px solid #CCC;
-    border-radius: 4px;
-    background-color: var(--color-white);
-}
-
-/* Cada item (loja) dentro da lista */
-.item-list-selectable li {
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid var(--color-border);
-    font-weight: bold;
-    color: #444;
-}
-
-.item-list-selectable li:last-child {
-    border-bottom: none;
-}
-
-/* O estilo do item QUANDO ESTÁ SELECIONADO (o azul!) */
-.item-list-selectable li.selected {
-    background-color: var(--color-blue-dark); /* #007BFF */
-    color: var(--color-white);
-}
-
-/* Um efeitinho visual ao passar o mouse */
-.item-list-selectable li:not(.selected):hover {
-    background-color: #f4f4f4;
-}
-
-.admin-form legend {
-    font-weight: bold;
-    padding: 0 8px;
-    font-size: 1.1em;
-    color: var(--color-text-primary);
-}
-
 .admin-form div {
     margin-bottom: 16px;
 }
@@ -985,7 +972,6 @@ input:checked + .slider:before {
     color: #555;
 }
 
-/* Inputs, Textarea e Selects padronizados */
 .admin-form input[type="text"],
 .admin-form input[type="number"],
 .admin-form textarea,
@@ -998,33 +984,66 @@ input:checked + .slider:before {
     box-sizing: border-box;
 }
 
-.admin-form textarea {
-    resize: vertical;
-    min-height: 80px;
-    font-family: Arial, sans-serif;
+/* Estilo padrão do item (Não selecionado) */
+.item-list-selectable li {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-weight: 500;
+    color: #444;
+    transition: all 0.2s ease;
+    display: flex;/* Para alinhar texto e ícone */
+    justify-content: space-between; /* Texto na esquerda, ícone na direita */
+    align-items: center;
 }
 
-/* --- Lista de Itens --- */
-.item-list-container {
-    margin-top: 24px;
+.item-list-selectable li:hover {
+    background-color: #000000;
+    color: white;
 }
 
-.item-list-container h3 {
-    font-size: 1.2em;
-    color: var(--color-text-primary);
-    border-top: 1px solid var(--color-border);
-    padding-top: 16px;
+.item-list-selectable li.selected {
+    background-color: #e67e22;
+    color: #ffffff;
+    border-color: #d35400;
+    font-weight: bold;
 }
 
+/* Verificar mais tarde o icone errado estar aparecendo */
+.item-list-selectable li.selected::after {
+  content: "\f14a"; 
+  font-family: "Font Awesome 6 Free"; 
+  font-weight: 900; 
+  font-size: 1rem;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+/* --- Filtro de Produtos  --- */
+.filter-container {
+    background-color: var(--color-blue-light);
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #cce5ff;
+    margin-bottom: 15px;
+}
+
+.filter-container label {
+    font-weight: bold;
+    color: var(--color-blue-dark);
+    margin-right: 10px;
+}
+
+/* --- Listas e Botões --- */
+.item-list-container { margin-top: 24px; }
 .item-list {
     list-style: none;
     padding-left: 0;
-    max-height: 400px; /* Limita a altura e adiciona scroll */
+    max-height: 400px;
     overflow-y: auto;
     border: 1px solid var(--color-border);
     border-radius: 4px;
 }
-
 .item-list li {
     display: flex;
     justify-content: space-between;
@@ -1032,56 +1051,53 @@ input:checked + .slider:before {
     padding: 12px;
     border-bottom: 1px solid var(--color-border);
 }
-
-.item-list li:last-child {
-    border-bottom: none;
+.item-actions { 
+    display: flex; 
+    gap: 8px; 
 }
 
-.item-list li span {
-    font-weight: bold;
-    color: #333;
-}
-
-.item-actions {
-    display: flex;
-    gap: 8px;
-}
-
-/* --- Botões --- */
 .btn-primary {
-    background-color: var(--color-orange);
-    color: var(--color-white);
+    background-color: #00af00;
+    color: #ffffff;
     border: none;
     padding: 12px 20px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
-    width: 100%;
-    transition: background-color 0.2s;
+    display: block;
+    margin: 16px auto 0;
+    width: fit-content;
+}
+.btn-primary:hover { 
+    background-color: #000000;
+    color: #ffffff;
 }
 
-.btn-primary:hover {
-    background-color: #E66000;
-}
-
-.btn-edit,
-.btn-remove {
-    padding: 6px 10px;
+.btn-edit, .btn-remove { 
+    border: none;
     border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
+    padding: 6px 10px;  
+    cursor: pointer; 
     font-weight: bold;
 }
 
-.btn-edit {
-    background-color: var(--color-blue-light);
-    border: 1px solid var(--color-blue-dark);
-    color: var(--color-blue-dark);
+.btn-edit { 
+    background-color: #E66000; 
+    color: white; 
 }
 
-.btn-remove {
-    background-color: var(--color-red-light);
-    border: 1px solid var(--color-red-dark);
-    color: var(--color-red-dark);
+.btn-edit:hover { 
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.btn-remove { 
+    background-color: #e61b00; 
+    color: white; 
+}
+
+.btn-remove:hover { 
+    background-color: #000000;
+    color: #ffffff;
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Lojas</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="admin.css"> 
+    <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <div class="header-full-width">
+        <header class="cabecalho">
+            <div class="logo"><h1>Mega<br><span>Loja</span></h1></div>
+            <div class="menu">
+                 <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i></a>
+            </div>
+        </header>
+    </div>
+
+    <main class="admin-container">
+        <h1>Painel Administrativo - Gerenciando Lojas</h1>
+
+        <nav class="admin-nav">
+            <a href="admin-lojas.html" class="btn-nav active"><i class="fa-solid fa-shop"></i> Gerenciar Lojas</a>
+            <a href="admin-produtos.html" class="btn-nav"><i class="fa-solid fa-box-archive"></i> Gerenciar Produtos</a>
+        </nav>
+
+        <section class="management-section" id="store-management">
+            <h2>Gerenciamento de Lojas</h2>
+
+            <form class="admin-form" id="store-form">
+                <fieldset>
+
+                    <input type="hidden" id="ID_LOJA" name="store_id">
+                    
+                    <div>
+                        <label for="NOME_LOJA">Nome da Loja:</label>
+                        <input type="text" id="NOME_LOJA" name="store_name" placeholder="Informe o nome da Loja" required>
+                    </div>
+                    
+                    <div>
+                        <label for="ENDERECO_LOJA">Endereço:</label>
+                        <input type="text" id="ENDERECO_LOJA" name="store_address" placeholder="Informe o Endereço">
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="store-submit-button">Salvar Loja</button>
+                </fieldset>
+            </form>
+
+            <div class="item-list-container">
+                <h3>Lojas Cadastradas</h3>
+                <ul id="store-list" class="item-list">
+                    </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="API.js"></script>
+    <script src="admin.js"></script> 
+</body>
+</html>

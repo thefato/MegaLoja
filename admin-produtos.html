@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Produtos</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="admin.css"> 
+    <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <div class="header-full-width">
+        <header class="cabecalho">
+            <div class="logo"><h1>Mega<br><span>Loja</span></h1></div>
+            <div class="menu">
+                 <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i></a>
+            </div>
+        </header>
+    </div>
+
+    <main class="admin-container">
+        <h1>Painel Administrativo - Gerenciando Produtos</h1>
+
+        <nav class="admin-nav">
+            <a href="admin-lojas.html" class="btn-nav"><i class="fa-solid fa-shop"></i> Gerenciar Lojas</a>
+            <a href="admin-produtos.html" class="btn-nav active"><i class="fa-solid fa-box-archive"></i> Gerenciar Produtos</a>
+        </nav>
+
+        <section class="management-section" id="product-management">
+            <h2>Gerenciamento de Produtos</h2>
+
+            <form class="admin-form" id="product-form">
+                <fieldset>
+
+                    <input type="hidden" id="ID_PRODUTO" name="product_id">
+                    
+                    <div>
+                        <label for="NOME_PRODUTO">Nome do Produto:</label>
+                        <input type="text" id="NOME_PRODUTO" name="product_name" placeholder="Digite o nome do Produto" required>
+                    </div>
+
+                    <div>
+                        <label for="CATEGORIA_PRODUTO">Categoria:</label>
+                        <select id="CATEGORIA_PRODUTO" required>
+                            <option value="" disabled selected>Selecione uma categoria</option>
+                            <option value="Eletrodomestico">Eletrodoméstico</option>
+                            <option value="Eletronicos">Eletrônicos</option>
+                            <option value="Construcao">Construção</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="DESCRICAO_PRODUTO">Descrição:</label>
+                        <textarea id="DESCRICAO_PRODUTO" name="product_description" rows="3"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="PRECO_PRODUTO">Preço (R$):</label>
+                        <input type="number" id="PRECO_PRODUTO" name="product_price" placeholder="1999.90" step="0.01" min="0" required>
+                    </div>
+
+                    <div>
+                        <label for="URL_IMAGEM_PRODUTO">URL da Imagem:</label>
+                        <input type="text" id="URL_IMAGEM_PRODUTO" name="product_image_url" placeholder="http://...">
+                    </div>
+
+                    <div>
+                        <label for="product-store-list">Disponível nas Lojas:</label>
+                        <ul id="product-store-list" class="item-list-selectable">
+                             </ul>
+                        <input type="hidden" id="LOJAS_SELECIONADAS_INPUT" name="product_store_ids">
+                    </div>
+
+                    <div>
+                        <label for="QTD_ESTOQUE">Quantidade em Estoque:</label>
+                        <input type="number" id="QTD_ESTOQUE" name="product_stock" placeholder="10" min="0" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="product-submit-button">Salvar Produto</button>
+                </fieldset>
+            </form>
+
+            <div class="item-list-container">
+                <h3>Produtos Cadastrados</h3>
+
+                <div class="filter-container">
+                    <label for="filtro-loja-select">Visualizar produtos da loja:</label>
+                    <select id="filtro-loja-select">
+                        <option value="todas">Todas as Lojas</option>
+                        </select>
+                </div>
+
+                <ul id="product-list" class="item-list">
+                    </ul>
+            </div>
+            
+        </section>
+    </main>
+
+    <script src="API.js"></script>
+    <script src="admin.js"></script> 
+</body>
+</html>
