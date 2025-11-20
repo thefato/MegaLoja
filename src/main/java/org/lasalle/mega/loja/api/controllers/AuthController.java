@@ -7,8 +7,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
-import org.lasalle.mega.loja.application.security.services.AuthLoginService;
-import org.lasalle.mega.loja.application.security.services.AuthRegisterService;
+import org.lasalle.mega.loja.application.services.security.AuthLoginService;
+import org.lasalle.mega.loja.application.services.security.AuthRegisterService;
 import org.lasalle.mega.loja.domain.request.LoginAuthRequest;
 import org.lasalle.mega.loja.domain.request.RegisterAuthRequest;
 import org.lasalle.mega.loja.domain.response.UserAuthResponse;
@@ -16,6 +16,7 @@ import org.lasalle.mega.loja.domain.response.UserScopesResponse;
 import org.lasalle.mega.loja.domain.vo.ErrorInfo;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,7 +61,7 @@ public class AuthController {
                     content = @Content(schema = @Schema(implementation = ErrorInfo.class))),
     })
     @PostMapping("/register")
-    public ResponseEntity<UserScopesResponse> register(@RequestBody RegisterAuthRequest authRequest) {
+    public ResponseEntity<UserScopesResponse> register(@RequestBody @Validated RegisterAuthRequest authRequest) {
         UserAuthResponse userAuthResponse = authRegisterService.executeUserRegister(authRequest);
         UserScopesResponse response = new UserScopesResponse(userAuthResponse.scopes());
 

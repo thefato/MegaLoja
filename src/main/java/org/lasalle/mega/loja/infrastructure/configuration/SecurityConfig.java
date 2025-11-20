@@ -3,7 +3,7 @@ package org.lasalle.mega.loja.infrastructure.configuration;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import org.lasalle.mega.loja.application.security.services.impl.PasswordHasherServiceImpl;
+import org.lasalle.mega.loja.application.services.security.impl.PasswordHasherServiceImpl;
 import org.lasalle.mega.loja.domain.vo.JwtProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -99,6 +99,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/products/v1/all**",
                                 "/products/v1/search**",
+
+                                "carts/v1/**",
 
                                 "/stores/all**",
 

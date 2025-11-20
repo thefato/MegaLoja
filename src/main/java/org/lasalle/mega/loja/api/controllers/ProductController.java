@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.annotation.security.PermitAll;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.lasalle.mega.loja.application.products.services.ProductCreateService;
-import org.lasalle.mega.loja.application.products.services.ProductRetrieveService;
-import org.lasalle.mega.loja.application.products.services.ProductUpdateService;
+import org.lasalle.mega.loja.application.services.products.ProductCreateService;
+import org.lasalle.mega.loja.application.services.products.ProductRetrieveService;
+import org.lasalle.mega.loja.application.services.products.ProductUpdateService;
 import org.lasalle.mega.loja.domain.dto.ProductDTO;
 import org.lasalle.mega.loja.domain.request.ProductCreateRequest;
 import org.lasalle.mega.loja.domain.request.ProductUpdateRequest;
@@ -59,7 +59,7 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "O produto não existe")
     })
     @Operation(summary = "Realiza a atualização de um produto no sistema")
-    public ResponseEntity<ProductDTO> update(@PathVariable @NotNull Integer productId,
+    public ResponseEntity<ProductDTO> update(@PathVariable @NotNull Long productId,
                                              @RequestBody @Validated ProductUpdateRequest updateRequest) {
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -73,7 +73,7 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "O produto não existe"),
     })
     @Operation(summary = "Remove um produto do sistema")
-    public ResponseEntity<Void> delete(@PathVariable @NotNull Integer productId) {
+    public ResponseEntity<Void> delete(@PathVariable @NotNull Long productId) {
         productUpdateService.deleteProduct(productId);
         return ResponseEntity.noContent().build();
     }
@@ -85,7 +85,7 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "O produto não existe"),
     })
     @Operation(summary = "Busca um produto por ID")
-    public ResponseEntity<ProductDTO> findAllProducts(@PathVariable @NotNull Integer productId) {
+    public ResponseEntity<ProductDTO> findAllProducts(@PathVariable @NotNull Long productId) {
         return ResponseEntity.ok(productRetrieveService.getProductById(productId));
     }
 

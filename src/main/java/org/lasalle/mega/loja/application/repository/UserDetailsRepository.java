@@ -9,4 +9,6 @@ public interface UserDetailsRepository extends JpaRepository<UserDetailsEntity, 
 
     Optional<UserDetailsEntity> findByDocument(String document);
 
+    Optional<UserDetailsEntity> findByUserCredentials_Email(String userCredentialsEmail);
+
 }
