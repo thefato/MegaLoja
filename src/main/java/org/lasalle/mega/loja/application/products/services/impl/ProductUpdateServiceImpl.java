@@ -27,34 +27,34 @@ public class ProductUpdateServiceImpl implements ProductUpdateService {
 
     @Override
     @Transactional
-    public ProductDTO updateProduct(ProductUpdateRequest updateRequest) {
-        Optional<ProductEntity> optional = productRepository.findById(updateRequest.getId());
+    public ProductDTO updateProduct(Integer productId, ProductUpdateRequest updateRequest) {
+        Optional<ProductEntity> optional = productRepository.findById(productId);
 
         if (optional.isEmpty()) {
-            log.warn("m=updateProduct, o produto não foi encontrado {}", updateRequest.getId());
-            throw new ProductNotFoundException("O produto informado não existe, id " + updateRequest.getId());
+            log.warn("m=updateProduct, o produto não foi encontrado {}", productId);
+            throw new ProductNotFoundException("O produto informado não existe, id " + productId);
         }
 
 
-        if (Objects.nonNull(updateRequest.getName()) && updateRequest.getName().isBlank()) {
+        if (Objects.nonNull(updateRequest.name()) && updateRequest.name().isBlank()) {
             log.warn("m=updateProduct, o nome do produto não pode ser vazio");
             throw new ProductInvalidNameException();
         }
 
-        if (Objects.nonNull(updateRequest.getAmount()) && updateRequest.getAmount() < 0) {
+        if (Objects.nonNull(updateRequest.amount()) && updateRequest.amount() < 0) {
             log.warn("m=updateProduct, a quantidade do produto recebida é menor que zero {}", updateRequest);
             throw new ProductInvalidAmountException();
         }
 
-        if (Objects.nonNull(updateRequest.getPrice()) && updateRequest.getPrice().doubleValue() < 0) {
+        if (Objects.nonNull(updateRequest.price()) && updateRequest.price().doubleValue() < 0) {
             log.warn("m=updateProduct, o valor do produto recebida é menor que zero {}", updateRequest);
             throw new ProductInvalidPriceException();
         }
 
         ProductEntity productEntity = optional.get();
 
-        if (Objects.nonNull(updateRequest.getCategory())) {
-            Optional<ProductCategoryEntity> productCategory = productCategoryRepository.findById(updateRequest.getCategory());
+        if (Objects.nonNull(updateRequest.category())) {
+            Optional<ProductCategoryEntity> productCategory = productCategoryRepository.findById(updateRequest.category());
 
             if (productCategory.isEmpty()) {
                 log.warn("m=updateProduct, a categoria recebida não existe request {}", updateRequest);
@@ -78,6 +78,16 @@ public class ProductUpdateServiceImpl implements ProductUpdateService {
         log.info("m=updateProduct, produto atualizado com sucesso {}", productEntity);
 
         return ProductDTO.from(productEntity);
+    }
+
+    @Override
+    public void deleteProduct(Integer productId) {
+        if (productRepository.findById(productId).isEmpty()) {
+            log.warn("m=updateProduct, o produto não foi encontrado {}", productId);
+            throw new ProductNotFoundException("O produto informado não existe, id " + productId);
+        }
+
+        productRepository.deleteById(productId);
     }
 
 }

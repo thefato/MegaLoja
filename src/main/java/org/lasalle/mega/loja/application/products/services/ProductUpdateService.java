@@ -5,6 +5,8 @@ import org.lasalle.mega.loja.domain.request.ProductUpdateRequest;
 
 public interface ProductUpdateService {
 
-    ProductDTO updateProduct(ProductUpdateRequest createRequest);
+    ProductDTO updateProduct(Integer productId, ProductUpdateRequest createRequest);
+
+    void deleteProduct(Integer productId);
 
 }

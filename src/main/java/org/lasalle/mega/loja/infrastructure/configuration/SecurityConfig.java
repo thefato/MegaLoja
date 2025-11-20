@@ -98,7 +98,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/products/v1/all**",
-                                "/products/v1/categories**",
+                                "/products/v1/by-category**",
+
+                                "/stores/all**",
 
                                 "/auth/v1/login",
                                 "/auth/v1/register",

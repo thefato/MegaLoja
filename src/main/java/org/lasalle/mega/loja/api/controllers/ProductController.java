@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.annotation.security.PermitAll;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.lasalle.mega.loja.application.products.services.ProductCreateService;
 import org.lasalle.mega.loja.application.products.services.ProductRetrieveService;
@@ -32,39 +33,53 @@ public class ProductController {
 
     private final ProductUpdateService productUpdateService;
 
-    @PostMapping("/create")
+    @PostMapping
     @PreAuthorize("hasAuthority('SCOPE_CREATE_PRODUCT')")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "OK"),
-            @ApiResponse(responseCode = "401", description = "O preço precisa ser maior ou igual a zero"),
-            @ApiResponse(responseCode = "401", description = "A quantidade precisa ser maior ou igual a zero"),
-            @ApiResponse(responseCode = "401", description = "A categoria vinculada precisa existir"),
+            @ApiResponse(responseCode = "201", description = "Produto criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "O preço precisa ser maior ou igual a zero"),
+            @ApiResponse(responseCode = "400", description = "A quantidade precisa ser maior ou igual a zero"),
+            @ApiResponse(responseCode = "400", description = "A categoria vinculada precisa existir"),
     })
     @Operation(summary = "Realiza o cadastro de um novo produto no sistema")
-    public ResponseEntity<ProductDTO> save(@RequestBody ProductCreateRequest createRequest) {
+    public ResponseEntity<ProductDTO> create(@RequestBody @Validated ProductCreateRequest createRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(productCreateService.createProduct(createRequest));
     }
 
-    @PatchMapping("/update")
+    @PatchMapping("/{productId}")
     @PreAuthorize("hasAuthority('SCOPE_CREATE_PRODUCT')")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "OK"),
-            @ApiResponse(responseCode = "401", description = "O nome informado não pode ser vazio"),
-            @ApiResponse(responseCode = "401", description = "O preço precisa ser maior ou igual a zero"),
-            @ApiResponse(responseCode = "401", description = "A quantidade precisa ser maior ou igual a zero"),
-            @ApiResponse(responseCode = "401", description = "A categoria informada precisa existir"),
+            @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "O nome informado não pode ser vazio"),
+            @ApiResponse(responseCode = "400", description = "O preço precisa ser maior ou igual a zero"),
+            @ApiResponse(responseCode = "400", description = "A quantidade precisa ser maior ou igual a zero"),
+            @ApiResponse(responseCode = "400", description = "A categoria informada precisa existir"),
+            @ApiResponse(responseCode = "404", description = "O produto não existe")
     })
     @Operation(summary = "Realiza a atualização de um produto no sistema")
-    public ResponseEntity<ProductDTO> save(@RequestBody @Validated ProductUpdateRequest updateRequest) {
+    public ResponseEntity<ProductDTO> update(@PathVariable @NotNull Integer productId,
+                                             @RequestBody @Validated ProductUpdateRequest updateRequest) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(productUpdateService.updateProduct(updateRequest));
+                .body(productUpdateService.updateProduct(productId, updateRequest));
+    }
+
+    @DeleteMapping("/{productId}")
+    @PreAuthorize("hasAuthority('SCOPE_CREATE_PRODUCT')")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Produto removido com sucesso"),
+            @ApiResponse(responseCode = "404", description = "O produto não existe"),
+    })
+    @Operation(summary = "Remove um produto do sistema")
+    public ResponseEntity<Void> delete(@PathVariable @NotNull Integer productId) {
+        productUpdateService.deleteProduct(productId);
+        return ResponseEntity.noContent().build();
     }
 
     @PermitAll
-    @PostMapping("/all")
+    @GetMapping("/all")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK")
     })
@@ -73,15 +88,15 @@ public class ProductController {
         return ResponseEntity.ok(productRetrieveService.getAllProducts(pageable));
     }
 
-    @PostMapping("/categories")
+    @PermitAll
+    @GetMapping("/by-category")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK")
     })
-    @Operation(summary = "Busca todos os produtos em uma categoria especifica de forma paginada")
-    public ResponseEntity<Page<ProductDTO>> findAllProducts(@RequestParam List<Integer> categories,
-                                                            Pageable pageable) {
+    @Operation(summary = "Busca todos os produtos em uma categoria específica de forma paginada")
+    public ResponseEntity<Page<ProductDTO>> findAllProductsByCategory(@RequestParam List<Integer> categories,
+                                                                      Pageable pageable) {
         return ResponseEntity.ok(productRetrieveService.getAllInCategory(categories, pageable));
     }
-
 
 }
