@@ -79,6 +79,17 @@ public class ProductController {
     }
 
     @PermitAll
+    @GetMapping("/{productId}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "O produto não existe"),
+    })
+    @Operation(summary = "Busca um produto por ID")
+    public ResponseEntity<ProductDTO> findAllProducts(@PathVariable @NotNull Integer productId) {
+        return ResponseEntity.ok(productRetrieveService.getProductById(productId));
+    }
+
+    @PermitAll
     @GetMapping("/all")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK")
@@ -89,14 +100,17 @@ public class ProductController {
     }
 
     @PermitAll
-    @GetMapping("/by-category")
+    @GetMapping("/search")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK")
     })
-    @Operation(summary = "Busca todos os produtos em uma categoria específica de forma paginada")
-    public ResponseEntity<Page<ProductDTO>> findAllProductsByCategory(@RequestParam List<Integer> categories,
-                                                                      Pageable pageable) {
-        return ResponseEntity.ok(productRetrieveService.getAllInCategory(categories, pageable));
+    @Operation(summary = "Busca produtos filtrando por categoria e/ou nome (LIKE)")
+    public ResponseEntity<Page<ProductDTO>> findProductsByFilters(
+            @RequestParam(required = false) List<Integer> categories,
+            @RequestParam(required = false) String name,
+            Pageable pageable) {
+
+        return ResponseEntity.ok(productRetrieveService.getAllByFilters(categories, name, pageable));
     }
 
 }

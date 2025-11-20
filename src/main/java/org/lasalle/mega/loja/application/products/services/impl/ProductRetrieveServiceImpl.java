@@ -3,10 +3,8 @@ package org.lasalle.mega.loja.application.products.services.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.lasalle.mega.loja.application.products.services.ProductRetrieveService;
-import org.lasalle.mega.loja.application.repository.ProductCategoryRepository;
 import org.lasalle.mega.loja.application.repository.ProductRepository;
 import org.lasalle.mega.loja.domain.dto.ProductDTO;
-import org.lasalle.mega.loja.domain.entity.ProductCategoryEntity;
 import org.lasalle.mega.loja.domain.entity.ProductEntity;
 import org.lasalle.mega.loja.infrastructure.exceptions.ProductNotFoundException;
 import org.springframework.data.domain.Page;
@@ -14,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -23,8 +22,6 @@ public class ProductRetrieveServiceImpl implements ProductRetrieveService {
 
     private final ProductRepository productRepository;
 
-    private final ProductCategoryRepository productCategoryRepository;
-
     @Override
     public Page<ProductDTO> getAllProducts(Pageable pageable) {
         return productRepository.findAll(pageable)
@@ -32,11 +29,24 @@ public class ProductRetrieveServiceImpl implements ProductRetrieveService {
     }
 
     @Override
-    public Page<ProductDTO> getAllInCategory(List<Integer> categoriesIds, Pageable pageable) {
-        List<ProductCategoryEntity> categories = productCategoryRepository.findAllById(categoriesIds);
+    public Page<ProductDTO> getAllByFilters(List<Integer> categories, String name, Pageable pageable) {
+        boolean noCategories = Objects.requireNonNullElse(categories, List.of()).isEmpty();
+        boolean noName = Objects.requireNonNullElse(name, "").isBlank();
 
-        return productRepository.findByCategoryIn(categories, pageable)
-                .map(ProductDTO::from);
+        if (noCategories && noName) {
+            return getAllProducts(pageable);
+        }
+
+        Page<ProductEntity> page = productRepository.findByFilters(
+                noCategories ? null : categories,
+                noName ? null : name,
+                pageable
+        );
+
+        log.info("m=getAllByFilters, categories={}, name={}, totalElements={}",
+                categories, name, page.getTotalElements());
+
+        return page.map(ProductDTO::from);
     }
 
     @Override

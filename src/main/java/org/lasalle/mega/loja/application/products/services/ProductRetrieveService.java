@@ -10,7 +10,7 @@ public interface ProductRetrieveService {
 
     Page<ProductDTO> getAllProducts(Pageable pageable);
 
-    Page<ProductDTO> getAllInCategory(List<Integer> categories, Pageable pageable);
+    Page<ProductDTO> getAllByFilters(List<Integer> categories, String name, Pageable pageable);
 
     ProductDTO getProductById(Integer id);
 
