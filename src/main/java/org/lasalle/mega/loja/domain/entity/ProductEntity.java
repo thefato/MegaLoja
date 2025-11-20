@@ -38,6 +38,9 @@ public class ProductEntity {
     @Column(name = "vc_name", length = 256, nullable = false)
     private String name;
 
+    @Column(name = "vc_description", length = 2048)
+    private String description;
+
     @Column(name = "num_amount", nullable = false)
     private Long amount;
 
