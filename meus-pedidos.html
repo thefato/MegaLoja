@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Pedidos - MegaLoja</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="header-full-width">
+        <header class="cabecalho">
+            <div class="logo">
+                <h1>Mega<br><span>Loja</span></h1>
+            </div>
+
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input id="searchItem" type="text" placeholder="Encontre aqui as melhores ofertas"/>
+            </div>
+
+            <div class="menu">
+                <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> <span>Início</span></a>
+
+                <a href="login.html" class="menu-item">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Sua conta</span>
+                </a>
+                <a href="carrinho.html" class="menu-item carrinho-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                <button id="btnAcessibilidade" class="menu-item acessibilidade-icon">
+                    <i class="fa-solid fa-person"></i>
+                </button>
+            </div>
+        </header>
+    </div>
+
+    <main class="container">
+        <h2 style="margin-bottom: 24px; color: #333;">Meus Pedidos</h2>
+        
+        <div id="user-orders-list" class="orders-container">
+            <p>Carregando seus pedidos...</p>
+        </div>
+    </main>
+
+    <script src="pedidos.js"></script>
+</body>
+</html>

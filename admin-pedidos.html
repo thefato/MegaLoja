@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Pedidos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css"> <script src="https://kit.fontawesome.com/f70ee5225b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="header-full-width">
+        <header class="cabecalho">
+            <div class="logo"><h1>Mega<br><span>Loja</span></h1></div>
+            <div class="menu">
+                <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i></a>
+            </div>
+        </header>
+    </div>
+
+    <main class="admin-container">
+        <h1>Painel Administrativo - Gerenciando Pedidos</h1>
+
+        <nav class="admin-nav">
+            <a href="admin-lojas.html" class="btn-nav"><i class="fa-solid fa-shop"></i> Gerenciar Lojas</a>
+            <a href="admin-produtos.html" class="btn-nav"><i class="fa-solid fa-box-archive"></i> Gerenciar Produtos</a>
+            <a href="admin-pedidos.html" class="btn-nav active"><i class="fa-solid fa-table-list"></i> Pedidos</a>
+        </nav>
+
+        <section class="management-section">
+            <div class="form-header">
+                <h3><i class="fa-solid fa-list-check"></i> Gerenciar Status de Pedidos</h3>
+            </div>
+            
+            <div class="form-body">
+                <div id="admin-orders-list" class="orders-container">
+                    <p>Carregando todos os pedidos...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="pedidos.js"></script>
+</body>
+</html>
