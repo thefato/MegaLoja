@@ -148,40 +148,6 @@ if (totalSlides > 0) {
     }
 
 
-    /**
-      Função  para buscar os produtos no Back-End.
-     */
-    async function fetchRecommendedProducts() {
-        
-        // substituir pela url da API?
-        const apiEndpoint = 'http://localhost:'; 
-        
-        try {
-            // Requisição HTTP para a API
-            const response = await fetch(apiEndpoint); 
-
-            if (!response.ok) {
-                // Lança um erro se o status for 4xx ou 5xx
-                throw new Error(`Falha ao buscar dados (Status: ${response.status})`);
-            }
-
-            // Converte a resposta JSON em um array de objetos JavaScript
-            const productsArray = await response.json(); 
-            
-            // Renderiza os produtos na tela
-            renderProducts(productsArray); 
-
-        } catch (error) {
-            console.error("Erro na comunicação com o Back-End:", error);
-            const container = document.getElementById('product-container');
-            if (container) {
-                container.innerHTML = `<p style="color: red;">Não foi possível carregar os produtos. Verifique a API. (${error.message})</p>`;
-            }
-        }
-    }
-
-    // CHAMA A FUNÇÃO DE BUSCAR PRODUTOS QUANDO A PÁGINA CARREGA
-    fetchRecommendedProducts();
 
 });
 

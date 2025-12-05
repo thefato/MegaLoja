@@ -70,7 +70,7 @@ document.getElementById("product-cart-grid").addEventListener("click", async (ev
 
             currentTotal -= price * quantity;
             summaryValue.innerText = "R$ " + currentTotal.toFixed(2);
-
+t
             itemElement.remove();
 
         } catch (error) {
